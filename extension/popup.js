@@ -1,5 +1,5 @@
 // popup.js
-const backendBaseUrl = "http://localhost:8000";
+const backendBaseUrl = "https://echo-lens-backend.onrender.com";
 
 function getRedditUrl(tab) {
   const url = tab.url;
