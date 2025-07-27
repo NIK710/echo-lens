@@ -1,0 +1,13 @@
+body {
+  font-family: sans-serif;
+  width: 250px;
+  padding: 10px;
+}
+button {
+  padding: 8px 12px;
+  margin-top: 10px;
+}
+#result {
+  margin-top: 15px;
+  font-size: 0.9em;
+}

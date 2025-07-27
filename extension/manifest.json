@@ -1,0 +1,16 @@
+{
+  "manifest_version": 3,
+  "name": "EchoLens",
+  "version": "1.0",
+  "description": "Analyze Reddit threads for bias and echo chambers using Gemini",
+  "permissions": ["activeTab", "scripting"],
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icons/icon.png"
+    }
+  },
+  "icons": {
+    "16": "icons/icon.png"
+  }
+}
