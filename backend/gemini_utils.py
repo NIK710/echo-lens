@@ -12,9 +12,7 @@ def analyze_comments_with_gemini(comments: list[str]) -> str:
         return "No comments to analyze."
 
     prompt = (
-        "Analyze the following Reddit thread comments for signs of political bias, "
-        "groupthink, or echo chamber behavior. Mention tone, diversity of opinion, and any "
-        "emotional or persuasive language patterns you see.\n\n"
+        "Give me a brief summary of the following Reddit comments:\n\n"
         + "\n\n".join(comments[:20])  # Limit to 20 comments
     )
 

@@ -1,22 +1,33 @@
-document.getElementById("analyze-btn").addEventListener("click", async () => {
-  const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+// popup.js
+const backendBaseUrl = "http://localhost:8000";
+
+function getRedditUrl(tab) {
   const url = tab.url;
+  return url.includes("reddit.com") ? url : null;
+}
 
-  document.getElementById("result").textContent = "Sending to backend...";
+function showAnalysis(text) {
+  document.getElementById("status").textContent = "Analysis complete:";
+  document.getElementById("result").textContent = text;
+}
 
-  fetch("http://localhost:8000/analyze_reddit", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({ url })
-  })
+chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+  const redditUrl = getRedditUrl(tabs[0]);
+
+  if (!redditUrl) {
+    document.getElementById("status").textContent =
+      "Not a Reddit thread. Open one and try again.";
+    return;
+  }
+
+  fetch(`${backendBaseUrl}/analyze?url=${encodeURIComponent(redditUrl)}`)
     .then((res) => res.json())
     .then((data) => {
-      document.getElementById("result").textContent = data.summary || "Done!";
+      showAnalysis(data.gemini_analysis || "No analysis returned.");
     })
     .catch((err) => {
+      document.getElementById("status").textContent = "Error fetching analysis.";
       console.error(err);
-      document.getElementById("result").textContent = "Error analyzing thread.";
     });
 });
+
