@@ -2,3 +2,4 @@ fastapi
 uvicorn
 praw
 python-dotenv
+google-genai
