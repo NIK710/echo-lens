@@ -25,7 +25,7 @@ def analyze_comments_with_gemini(comments: list[str]) -> str:
             4. **Framing and Language**: Describe any framing, loaded language, or rhetorical techniques being used that may influence how readers perceive the topic.
 
             Here are the Reddit comments:
-            {chr(10).join(comments[:20])}
+            {chr(10).join(comments)}
             """
 
     try:

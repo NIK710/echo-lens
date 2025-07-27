@@ -12,6 +12,13 @@ reddit = praw.Reddit(
 
 def fetch_reddit_thread(url):
     submission = reddit.submission(url=url)
+    # Only expand the top-level comments, don't load "more comments"
     submission.comments.replace_more(limit=0)
-    all_comments = [comment.body for comment in submission.comments.list()]
-    return all_comments
+    
+    # Get top 10 comments (sorted by Reddit's default sorting which is usually "best")
+    top_comments = []
+    for comment in submission.comments[:10]:  # Limit to first 10 comments
+        if hasattr(comment, 'body') and comment.body != '[deleted]' and comment.body != '[removed]':
+            top_comments.append(comment.body)
+    
+    return top_comments
